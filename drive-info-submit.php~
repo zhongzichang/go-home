@@ -1,0 +1,90 @@
+<?php
+require_once("conf.php");
+
+$source = $_POST["source"];
+$destination = $_POST["destination"];
+$startDate = $_POST["start_date"];
+$numberOfPeople = $_POST["number_of_people"];
+$mobile = $_POST["mobile"];
+$unitPhone = $_POST["unit_phone"];
+$postscript = $_POST["postscript"];
+
+
+$mysqli = new mysqli($db_host, $db_username, $db_password, $db_schema);
+
+/* check connection */
+if (mysqli_connect_errno())
+  {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+  }
+
+/* change character set to utf8 */
+if (!$mysqli->set_charset("utf8")) 
+  {
+    printf("Error loading character set utf8: %s\n", $mysqli->error);
+  }
+ else
+   {
+     //printf("Current character set: %s\n", $mysqli->character_set_name());
+   }
+
+
+$sql = "insert into drive_info(`source`,`destination`,`start_date`,`number_of_people`,`mobile`,`unit_phone`,`postscript`)"
+  ." values(?,?,?,?,?,?,?)";
+
+if( $stmt = $mysqli->prepare($sql) ){
+
+  $stmt->bind_param("sssisss", $source, $destination, $startDate, $numberOfPeople, $mobile, $unitPhone, $postscript);
+
+  $stmt->execute();
+
+  $stmt->close(); 
+
+ }
+
+
+/* close connection */
+$mysqli->close();
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>送老乡回家</title>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/git/jquery.mobile-git.min.css" />
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/git/jquery.mobile-git.min.js"></script>
+  </head>
+  <body>
+
+  <div data-role="page">
+
+  <div data-role="header">
+  <h1>送老乡回家</h1>
+  <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+  </div><!-- /header -->
+
+  <div role="main" class="ui-content">
+
+  <p>信息已提交。</p>
+
+  <a href="./" class="ui-btn ui-btn-inline">返回首页</a>
+	    
+  </div><!-- /content -->
+
+<?php
+
+include("nav_panel.php");
+
+?>
+
+  </div><!-- /page -->
+
+  </body>
+  </html>
