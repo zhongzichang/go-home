@@ -87,9 +87,10 @@ $mysqli->close();
   if( !IsNullOrEmptyString($row["unit_cert"]) )
     {
   ?>
-
-<h3>单位证明文件</h3>
+      <h3 class="ui-bar ui-bar-a ui-corner-all">单位证明文件</h3>
+      <div class="ui-body">
   <img src="upload/<?=$row["unit_cert"]?>" alt="unit cert" class="img">
+  </div>
   <?php
   }
 ?>

@@ -55,9 +55,9 @@ $mysqli->close();
   <link rel="stylesheet" href="jquery.mobile-git.min.css" />
   <style>
   .img {width:100%;}
-  </style>
+</style>
 
-  <script src="jquery-1.10.2.min.js"></script>
+<script src="jquery-1.10.2.min.js"></script>
   <script src="jquery.mobile-git.min.js"></script>
   <script>
   $( document ).on( "pagecreate", function() {
@@ -96,20 +96,23 @@ $mysqli->close();
   <?php
   if( !IsNullOrEmptyString($row["unit_cert"]) )
     {
-  ?>
+      ?>
+      <h3 class="ui-bar ui-bar-a ui-corner-all">>单位证明文件</h3>
+      <div class="ui-body">
+      <img src="upload/<?=$row["unit_cert"]?>" alt="unit cert" class="img">
+      </div>
 
-<h3>单位证明文件</h3>
-  <img src="upload/<?=$row["unit_cert"]?>" alt="unit cert" class="img">
-  <?php
-  }
+
+      <?php
+    }
 ?>
 
-  </div><!-- /content -->
+</div><!-- /content -->
 
 
-  <?php
+<?php
 
-  include("nav_panel.php");
+include("nav_panel.php");
 
 ?>
 
